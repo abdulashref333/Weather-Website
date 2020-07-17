@@ -3,7 +3,9 @@ const express = require('express');
 const path = require('path');
 const geocode = require('./utils/geocode');
 const forcast = require('./utils/forcast');
+
 const app = express();
+const port = process.env.PORT || 3000;
 
 const publicDirectory = path.join(__dirname,'../public');
 const viewsDirectory = path.join(__dirname,'../templetes/views');
@@ -74,4 +76,4 @@ app.get('*',(req,res)=>{
     });
 });
 
-app.listen(3000,()=>{console.log('Server is up on port 3000')});
+app.listen(port,()=>{console.log('Server is up on port '+ port)});
