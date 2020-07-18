@@ -2,7 +2,9 @@ const request = require('request');
 
 const geocode = (address,callback) =>{
     let url = '';
+    let lan = '';
     langDetect(address,(lang)=>{
+        lan = lang;
         if(lang==='arabic'){
             url="https://api.mapbox.com/geocoding/v5/mapbox.places/+"+encodeURIComponent(address)+
             ".json?language=ar&access_token=pk.eyJ1IjoiYWJkdWxhc2hyZWYzMzMiLCJhIjoiY2tjZ2x3eHZvMHQ5ZTJ6cGJnZTJxYThnZCJ9.yJ69LtPHEaURRupIV2Ebrg";
@@ -11,7 +13,6 @@ const geocode = (address,callback) =>{
             ".json?language=en&access_token=pk.eyJ1IjoiYWJkdWxhc2hyZWYzMzMiLCJhIjoiY2tjZ2x3eHZvMHQ5ZTJ6cGJnZTJxYThnZCJ9.yJ69LtPHEaURRupIV2Ebrg";
         }
     });
-    
     request({url, json:true},(error,{body}={})=>{
         if(error){
             callback('Unanble to connect to location services!',undefined);
@@ -21,7 +22,8 @@ const geocode = (address,callback) =>{
             callback(undefined,{
                 latitude:body.features[0].center[1],
                 longitude:body.features[0].center[0],
-                location:body.features[0].place_name
+                location:body.features[0].place_name,
+                lan
             });
         }
     });

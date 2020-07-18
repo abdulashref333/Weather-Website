@@ -44,13 +44,13 @@ app.get('/weather',(req,res)=>{
             error:"Pleaze select the location"
         });
     }
-    geocode(address,(error,{latitude, longitude, location}={})=>{
+    geocode(address,(error,{latitude, longitude, location,lan}={})=>{
         if(error){
            return res.send({
                error
            });
         }
-        forcast(latitude,longitude,(error,data)=>{
+        forcast(latitude,longitude,lan,(error,data)=>{
             if(error){
                return res.send({
                     error

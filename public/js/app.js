@@ -9,6 +9,7 @@ const message5= document.querySelector('#message-5');
 weatherForm.addEventListener('submit',(e)=>{
     e.preventDefault();
     message1.textContent = 'Loading...';
+    message2.textContent = "";
     message3.textContent = "";
     message4.textContent = "";
     message5.textContent = "";
@@ -20,7 +21,8 @@ weatherForm.addEventListener('submit',(e)=>{
                     return message1.textContent = error;
                 }
                 message1.textContent = location;
-                message3.textContent = data.temperature;
+                message2.textContent = data.temperature;
+                message3.textContent = data.feelslike;
                 document.getElementById("myImg").src = data.icon; 
                 message4.textContent = data.description;
                 message5.textContent = data.date;
